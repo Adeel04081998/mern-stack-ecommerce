@@ -31,6 +31,10 @@ app.use(`${api}/products`, productsRoutes);
 app.use(`${api}/users`, usersRoutes);
 app.use(`${api}/orders`, ordersRoutes);
 
+const PORT = process.env.PORT
+
+
+
 //Database
 mongoose.connect(process.env.CONNECTION_STRING, {
     useNewUrlParser: true,
@@ -45,7 +49,7 @@ mongoose.connect(process.env.CONNECTION_STRING, {
 })
 
 //Server
-app.listen(3000, ()=>{
+app.listen(PORT || 5000, ()=>{
 
-    console.log('server is running http://localhost:3000');
+    console.log('server is running on PORt', PORT);
 })

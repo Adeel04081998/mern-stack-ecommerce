@@ -24,14 +24,13 @@ export default function App() {
 
 
   useEffect(() => {
-    console.log("here 1");
 
     init()
   }, [])
 
   const init = async() => {
     // await loadLocale()
-    console.log("here 2");
+
 
   }
 

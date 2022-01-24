@@ -41,7 +41,6 @@ const ProductContainer = (props) => {
         axios
           .get(`${baseURL}products`)
           .then((res) => {
-            console.log("here5 res=>>",res.data);
             setProducts(res.data);
             setProductsFiltered(res.data);
             setProductsCtg(res.data);
