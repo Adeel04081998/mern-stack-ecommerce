@@ -32,6 +32,9 @@ app.use(`${api}/users`, usersRoutes);
 app.use(`${api}/orders`, ordersRoutes);
 
 const PORT = process.env.PORT
+app.get('/', (req,res)=>{
+    res.send("Helle here in app")
+})
 
 
 
