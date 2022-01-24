@@ -1,12 +1,12 @@
 {
   "expo": {
-    "name": "easy-shop",
+    "name": "Gabani Boutique",
     "slug": "easy-shop",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/appicone.png",
     "splash": {
-      "image": "./assets/Logo.png",
+      "image": "./assets/appicone.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -16,12 +16,17 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+  
     "ios": {
+      "bundleIdentifier" : "com.Gabani.Boutique",
+      "buildNumber":"1.0.0",
       "supportsTablet": true
     },
     "android": {
+      "package" : "com.Gabani.Boutique",
+      "versionCode":1,
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/appicone_adaptive_fore.png",
         "backgroundColor": "#FFFFFF"
       }
     },

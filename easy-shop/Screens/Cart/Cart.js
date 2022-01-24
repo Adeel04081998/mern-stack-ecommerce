@@ -24,7 +24,8 @@ import AuthGlobal from "../../Context/store/AuthGlobal"
 import axios from "axios";
 import baseURL from "../../assets/common/baseUrl";
 import AsyncStorage from "@react-native-community/async-storage"
-
+import * as Localization from 'expo-localization';
+import i18n from 'i18n-js'
 var { height, width } = Dimensions.get("window");
 
 const Cart = (props) => {
@@ -34,6 +35,21 @@ const Cart = (props) => {
   // Add this
   const [productUpdate, setProductUpdate] = useState()
   const [totalPrice, setTotalPrice] = useState()
+  // const en = {
+  //   login: "Login English",
+  //   foo: 'foo'
+  // }
+  // const fr = {
+  //   login: "Login in  French",
+  //   foo: 'foo'
+  // }
+  // i18n.fallbacks = true
+  // i18n.translations = { fr, en };
+  // i18n.locale = "fr";
+
+
+
+
   useEffect(() => {
     getProducts()
     return () => {
@@ -41,24 +57,24 @@ const Cart = (props) => {
       setTotalPrice()
     }
   }, [props])
-  
-    const getProducts = () => {
-      var products = [];
-      props.cartItems.forEach(cart => {
-        axios.get(`${baseURL}products/${cart.product}`).then(data => {
-          products.push(data.data)
-          setProductUpdate(products)
-          var total = 0;
-          products.forEach(product => {
-            const price = (total += product.price)
-              setTotalPrice(price)
-          });
-        })
+
+  const getProducts = () => {
+    var products = [];
+    props.cartItems.forEach(cart => {
+      axios.get(`${baseURL}products/${cart.product}`).then(data => {
+        products.push(data.data)
+        setProductUpdate(products)
+        var total = 0;
+        products.forEach(product => {
+          const price = (total += product.price)
+          setTotalPrice(price)
+        });
+      })
         .catch(e => {
           console.log(e)
         })
-      })
-    }
+    })
+  }
 
   return (
     <>
@@ -68,13 +84,13 @@ const Cart = (props) => {
           <SwipeListView
             data={productUpdate}
             renderItem={(data) => (
-             <CartItem item={data} />
+              <CartItem item={data} />
             )}
             renderHiddenItem={(data) => (
               <View style={styles.hiddenContainer}>
-                <TouchableOpacity 
-                style={styles.hiddenButton}
-                onPress={() => props.removeFromCart(data.item)}
+                <TouchableOpacity
+                  style={styles.hiddenButton}
+                  onPress={() => props.removeFromCart(data.item)}
                 >
                   <Icon name="trash" color={"white"} size={30} />
                 </TouchableOpacity>
@@ -90,16 +106,16 @@ const Cart = (props) => {
           />
           <View style={styles.bottomContainer}>
             <Left>
-                <Text style={styles.price}>$ {totalPrice}</Text>
+              <Text style={styles.price}>$ {totalPrice}</Text>
             </Left>
             <Right>
-                <EasyButton
-                  danger
-                  medium
-                  onPress={() => props.clearCart()}
-                >
-                  <Text style={{ color: 'white' }}>Clear</Text>
-                </EasyButton>
+              <EasyButton
+                danger
+                medium
+                onPress={() => props.clearCart()}
+              >
+                <Text style={{ color: 'white' }}>Clear</Text>
+              </EasyButton>
             </Right>
             <Right>
               {context.stateUser.isAuthenticated ? (
@@ -108,7 +124,7 @@ const Cart = (props) => {
                   medium
                   onPress={() => props.navigation.navigate('Checkout')}
                 >
-                <Text style={{ color: 'white' }}>Checkout</Text>
+                  <Text style={{ color: 'white' }}>Checkout</Text>
                 </EasyButton>
               ) : (
                 <EasyButton
@@ -116,17 +132,18 @@ const Cart = (props) => {
                   medium
                   onPress={() => props.navigation.navigate('Login')}
                 >
-                <Text style={{ color: 'white' }}>Login</Text>
+                  <Text style={{ color: 'white' }}>Login</Text>
                 </EasyButton>
               )}
-                
+
             </Right>
           </View>
         </Container>
       ) : (
         <Container style={styles.emptyContainer}>
-          <Text>Looks like your cart is empty</Text>
-          <Text>Add products to your cart to get started</Text>
+          <Text>{i18n.t("Looks like your cart is empty")}</Text>
+          <Text>{i18n.t("Add products to your cart to get started")}</Text>
+        
         </Container>
       )}
     </>
@@ -144,7 +161,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     clearCart: () => dispatch(actions.clearCart()),
     removeFromCart: (item) => dispatch(actions.removeFromCart(item))
-    }
+  }
 }
 
 const styles = StyleSheet.create({
@@ -152,19 +169,20 @@ const styles = StyleSheet.create({
     height: height,
     alignItems: "center",
     justifyContent: "center",
+    flex:1
   },
   bottomContainer: {
-      flexDirection: 'row',
-      position: 'absolute',
-      bottom: 0,
-      left: 0,
-      backgroundColor: 'white',
-      elevation: 20
+    flexDirection: 'row',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    backgroundColor: 'white',
+    elevation: 20
   },
   price: {
-      fontSize: 18,
-      margin: 20,
-      color: 'red'
+    fontSize: 18,
+    margin: 20,
+    color: 'red'
   },
   hiddenContainer: {
     flex: 1,

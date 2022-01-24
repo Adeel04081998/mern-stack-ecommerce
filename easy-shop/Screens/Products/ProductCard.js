@@ -11,6 +11,7 @@ import Toast from 'react-native-toast-message'
 import EasyButton from "../../Shared/StyledComponents/EasyButton"
 import { connect } from 'react-redux'
 import * as actions from '../../Redux/Actions/cartActions';
+import i18n from 'i18n-js'
 
 var { width } = Dimensions.get("window");
 
@@ -48,7 +49,7 @@ const ProductCard = (props) => {
                         })
                     }}
                     >
-                        <Text style={{ color: "white"}}>Add</Text>
+                        <Text style={{ color: "black"}}>{ i18n.t('Add')}</Text>
                     </EasyButton>
                 </View>
             ) : <Text style={{ marginTop: 20 }}>Currently Unavailable</Text>}
@@ -77,11 +78,13 @@ const styles = StyleSheet.create({
         backgroundColor: 'white'
     },
     image: {
-        width: width / 2 - 20 - 10,
-        height: width / 2 - 20 - 30,
+        // width: width / 2 - 20 - 10,
+        // height: width / 2 - 20 - 30,
+        width:80,
+        height:140,
         backgroundColor: 'transparent',
         position: 'absolute',
-        top: -45
+        
     },
     card: {
         marginBottom: 10,

@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useEffect } from "react";
 import { LogBox } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import Toast from "react-native-toast-message";
@@ -16,10 +16,25 @@ import Main from "./Navigators/Main";
 
 // Screens
 import Header from "./Shared/Header";
+import { loadLocale } from "./Languages/IMchangeLanguge";
 
 LogBox.ignoreAllLogs(true);
 
 export default function App() {
+
+
+  useEffect(() => {
+    console.log("here 1");
+
+    init()
+  }, [])
+
+  const init = async() => {
+    // await loadLocale()
+    console.log("here 2");
+
+  }
+
   return (
     <Auth>
       <Provider store={store}>

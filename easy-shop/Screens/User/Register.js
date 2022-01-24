@@ -6,6 +6,8 @@ import Error from "../../Shared/Error";
 import Toast from "react-native-toast-message";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import EasyButton from "../../Shared/StyledComponents/EasyButton";
+import i18n from 'i18n-js'
+
 
 import axios from "axios";
 import baseURL from "../../assets/common/baseUrl";
@@ -60,28 +62,28 @@ const Register = (props) => {
       extraHeight={200}
       enableOnAndroid={true}
     >
-      <FormContainer title={"Register"}>
+      <FormContainer title={i18n.t("Register")}>
         <Input
-          placeholder={"Email"}
+          placeholder={i18n.t("Email")}
           name={"email"}
           id={"email"}
           onChangeText={(text) => setEmail(text.toLowerCase())}
         />
         <Input
-          placeholder={"Name"}
+          placeholder={i18n.t("Name")}
           name={"name"}
           id={"name"}
           onChangeText={(text) => setName(text)}
         />
         <Input
-          placeholder={"Phone Number"}
+          placeholder={i18n.t("Phone Number")}
           name={"phone"}
           id={"phone"}
           keyboardType={"numeric"}
           onChangeText={(text) => setPhone(text)}
         />
         <Input
-          placeholder={"Password"}
+          placeholder={i18n.t("Password")}
           name={"password"}
           id={"password"}
           secureTextEntry={true}
@@ -92,7 +94,7 @@ const Register = (props) => {
         </View>
         <View>
           <EasyButton large primary onPress={() => register()}>
-            <Text style={{ color: "white" }}>Register</Text>
+            <Text style={{ color: "black" }}>{i18n.t("Register")}</Text>
           </EasyButton>
         </View>
         <View>
@@ -101,7 +103,7 @@ const Register = (props) => {
             secondary
             onPress={() => props.navigation.navigate("Login")}
           >
-            <Text style={{ color: "white" }}>Back to Login</Text>
+            <Text style={{ color: "black" }}>{i18n.t("Back to Login")}</Text>
           </EasyButton>
         </View>
       </FormContainer>

@@ -7,6 +7,7 @@ import TrafficLight from '../../Shared/StyledComponents/TrafficLight'
 
 import { connect } from 'react-redux';
 import * as actions from '../../Redux/Actions/cartActions';
+import i18n from 'i18n-js'
 
 const SingleProduct = (props) => {
 
@@ -77,7 +78,7 @@ const SingleProduct = (props) => {
                         })
                 }}
                    >
-                       <Text style={{ color: 'white'}}>Add</Text>
+                       <Text style={{ color: 'black'}}>{ i18n.t('Add')}</Text>
                    </EasyButton>
                 </Right>
             </View>

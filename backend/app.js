@@ -41,7 +41,7 @@ mongoose.connect(process.env.CONNECTION_STRING, {
     console.log('Database Connection is ready...')
 })
 .catch((err)=> {
-    console.log(err);
+    console.log("errorrr not ready=\>>>>",err);
 })
 
 //Server

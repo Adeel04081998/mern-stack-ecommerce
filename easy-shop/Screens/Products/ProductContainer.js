@@ -17,8 +17,9 @@ import SearchedProduct from "./SearchedProducts";
 import Banner from "../../Shared/Banner";
 import CategoryFilter from "./CategoryFilter";
 import baseURL from "../../assets/common/baseUrl";
-
+import i18n from 'i18n-js'
 var { height } = Dimensions.get('window')
+
 
 const ProductContainer = (props) => {
   const [products, setProducts] = useState([]);
@@ -40,6 +41,7 @@ const ProductContainer = (props) => {
         axios
           .get(`${baseURL}products`)
           .then((res) => {
+            console.log("here5 res=>>",res.data);
             setProducts(res.data);
             setProductsFiltered(res.data);
             setProductsCtg(res.data);
@@ -113,7 +115,7 @@ const ProductContainer = (props) => {
    <Item>
      <Icon name="ios-search" />
      <Input
-       placeholder="Search"
+       placeholder={i18n.t("Search")}
        onFocus={openList}
        onChangeText={(text) => searchProduct(text)}
      />
