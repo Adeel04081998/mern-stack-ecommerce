@@ -15,7 +15,7 @@
   "isAdmin": false,
   "name": "Fadi Nouh",
   "email": "fadinoh@gmail.com",
-  "passwordHash": "$2a$10$cXyRxEWzWFpF1zoeDhKIOORZuhfscZkggvZ/kNjaAxj3I2y8TiRnS",
+  "passwordHash": "$2a$04$kxhVXetUc/0CN0.wMs3Ka.m6vg9HOO9pSSJIkRhpFIrRMpvRFTSMy",
   "phone": "702241333",
   "__v": 0
 },{
@@ -25,7 +25,7 @@
   "isAdmin": true,
   "name": "Tiago Pereira",
   "email": "tiago@gmail.com",
-  "passwordHash": "$2a$10$0TZN47PNyhVml7I7B32xtuvbR04dmiAhRKBUUvNE4kQnFS5zCZNZK",
+  "passwordHash": "$2a$04$gsGy4aGoVFWWp4ETj7UUNOky0i3AQoJ3VyeBDqi17wKgehin.0x9a",
   "phone": "7022417777",
   "__v": 0
 }]

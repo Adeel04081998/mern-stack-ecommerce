@@ -41,6 +41,8 @@ const ProductContainer = (props) => {
         axios
           .get(`${baseURL}products`)
           .then((res) => {
+       
+
             setProducts(res.data);
             setProductsFiltered(res.data);
             setProductsCtg(res.data);
@@ -48,17 +50,19 @@ const ProductContainer = (props) => {
             setLoading(false)
           })
           .catch((error) => {
-            console.log('Api call error')
+            console.log('Api call error Products=>', error)
           })
     
         // Categories
         axios
           .get(`${baseURL}categories`)
           .then((res) => {
+
+            
             setCategories(res.data)
           })
           .catch((error) => {
-            console.log('Api call error')
+            console.log('Api call error categories',error)
           })
     
         return () => {

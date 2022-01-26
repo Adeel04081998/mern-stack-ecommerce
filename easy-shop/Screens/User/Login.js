@@ -9,6 +9,8 @@ import EasyButton from "../../Shared/StyledComponents/EasyButton";
 import AuthGlobal from "../../Context/store/AuthGlobal";
 import { loginUser } from "../../Context/actions/Auth.actions";
 import i18n from 'i18n-js'
+import axios from "axios";
+import baseURL from "../../assets/common/baseUrl";
 
 
 
@@ -16,6 +18,8 @@ const Login = (props) => {
   const context = useContext(AuthGlobal);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [phone, setPhoneNumber] = useState(null);
+
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -36,39 +40,68 @@ const Login = (props) => {
       loginUser(user, context.dispatch);
     }
   };
+  const sendOtp = () => {
+    if ( phone === "" ) {
+      setError("Please fill in the form correctly");
+    }
+    let user = {
+      phone: phone,
+    }; 
+    axios
+      .post(`${baseURL}otp/send`, user)
+      .then((res) => {
+        console.log("res=>>>> otp", res.data);
+       
+      })
+      .catch((error) => {
+      console.log("error=>>> otp",error);
+      });
+  };
+
+  useEffect(() => {
+console.log("useEffect");
+    let user = {
+      phone: phone,
+    }; 
+    axios
+      .post(`${baseURL}otp/verify`, user)
+      .then((res) => {
+        console.log("res=>>>> verify", res.data);
+        // alert(res)
+       
+      })
+      .catch((error) => {
+      console.log("error=>>> verify",error);
+      });
+
+  
+
+    return () => {
+    
+    }
+}, [])
 
   return (
     <FormContainer title={i18n.t('Login')}>
+    
       <Input
-        placeholder={i18n.t('Enter Email')}
-        name={"email"}
-        id={"email"}
-        value={email}
-        onChangeText={(text) => setEmail(text.toLowerCase())}
-      />
-      <Input
-        placeholder={i18n.t('Enter Password')}
+        placeholder={'Enter MobileNumber'}
         name={"password"}
         id={"password"}
-        secureTextEntry={true}
-        value={password}
-        onChangeText={(text) => setPassword(text)}
+        // secureTextEntry={true}
+        value={phone}
+        onChangeText={(text) => setPhoneNumber(text)}
       />
       <View style={styles.buttonGroup}>
         {error ? <Error message={error} /> : null}
-        <EasyButton large primary onPress={() => handleSubmit()}>
-          <Text style={{ color: "black" }}>{i18n.t('Login')}</Text>
+        <EasyButton large primary onPress={() => sendOtp()}>
+          <Text style={{ color: "black" }}>Login</Text>
         </EasyButton>
       </View>
-      <View style={[{ marginTop: 40 }, styles.buttonGroup]}>
-        <Text style={styles.middleText}>{i18n.t("Don't have an account yet? ")}</Text>
-        <EasyButton
-        large
-        secondary 
-        onPress={() => props.navigation.navigate("Register")}>
-          <Text style={{ color: "black" }}>{i18n.t('Register')}</Text>
-        </EasyButton>
-      </View>
+      
+
+
+
     </FormContainer>
   );
 };
