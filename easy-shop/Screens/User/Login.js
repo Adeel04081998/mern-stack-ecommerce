@@ -11,7 +11,7 @@ import { loginUser } from "../../Context/actions/Auth.actions";
 import i18n from 'i18n-js'
 import axios from "axios";
 import baseURL from "../../assets/common/baseUrl";
-
+import AsyncStorage from "@react-native-community/async-storage"
 
 
 const Login = (props) => {
@@ -50,7 +50,10 @@ const Login = (props) => {
     axios
       .post(`${baseURL}otp/send`, user)
       .then((res) => {
-        console.log("res=>>>> otp", res.data);
+      
+        const {otp}= res.data
+      let set = AsyncStorage.setItem("otpCode",otp)
+      console.log("set===>", set);
        
       })
       .catch((error) => {
@@ -58,28 +61,28 @@ const Login = (props) => {
       });
   };
 
-  useEffect(() => {
-console.log("useEffect");
-    let user = {
-      phone: phone,
-    }; 
-    axios
-      .post(`${baseURL}otp/verify`, user)
-      .then((res) => {
-        console.log("res=>>>> verify", res.data);
-        // alert(res)
+//   useEffect(() => {
+// console.log("useEffect");
+//     let user = {
+//       phone: phone,
+//     }; 
+//     axios
+//       .post(`${baseURL}otp/verify`, user)
+//       .then((res) => {
+//         console.log("res=>>>> verify", res.data);
+//         // alert(res)
        
-      })
-      .catch((error) => {
-      console.log("error=>>> verify",error);
-      });
+//       })
+//       .catch((error) => {
+//       console.log("error=>>> verify",error);
+//       });
 
   
 
-    return () => {
+//     return () => {
     
-    }
-}, [])
+//     }
+// }, [])
 
   return (
     <FormContainer title={i18n.t('Login')}>
@@ -97,6 +100,13 @@ console.log("useEffect");
         <EasyButton large primary onPress={() => sendOtp()}>
           <Text style={{ color: "black" }}>Login</Text>
         </EasyButton>
+        <EasyButton large primary onPress={
+
+() => props.navigation.navigate("Verify Otp")
+        }>
+          <Text style={{ color: "black" }}>Go to verify</Text>
+        </EasyButton>
+        
       </View>
       
 
